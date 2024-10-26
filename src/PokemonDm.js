@@ -1,46 +1,32 @@
-import { LitElement, html } from 'lit-element';
-import { getComponentSharedStyles } from '@bbva-web-components/bbva-core-lit-helpers';
-import styles from './pokemon-dm.css.js';
+import { LitElement} from 'lit-element';
 
-/**
- * ![LitElement component](https://img.shields.io/badge/litElement-component-blue.svg)
- *
- * This component ...
- *
- * Example:
- *
- * ```html
- *   <pokemon-dm></pokemon-dm>
- * ```
- */
 export class PokemonDm extends LitElement {
   static get properties() {
     return {
-      /**
-       * Description for property
-       */
-      name: {
-        type: String,
-      },
+      data: {type:Array},
     };
   }
 
   constructor() {
     super();
-    this.name = 'Cells';
+    this.data = [];
   }
 
-  static get styles() {
-    return [
-      styles,
-      getComponentSharedStyles('pokemon-dm-shared-styles'),
-    ];
+   async makeRequest() {
+
+    const promises = [];
+
+    for (let index = 1; index <= 20; index++) {
+      promises.push(
+        fetch(`https://pokeapi.co/api/v2/pokemon/${index}`)
+          .then((response) => response.json())
+          .catch((error) => console.error('Error:', error))
+      );
+    }
+
+    const data = await Promise.all(promises);
+    this.data = data.sort((a, b) => a.id - b.id);
   }
 
-  render() {
-    return html`
-      <p>Welcome to ${this.name}</p>
-      <slot></slot>
-    `;
-  }
+
 }
