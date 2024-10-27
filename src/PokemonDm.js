@@ -24,7 +24,6 @@ export class PokemonDm extends LitElement {
       promises.push(
         fetch(`https://pokeapi.co/api/v2/pokemon/${index}`)
           .then((response) => response.json())
-          .catch((error) => console.error('Error:', error))
       );
     }
 
@@ -33,23 +32,18 @@ export class PokemonDm extends LitElement {
   }
 
   async fetchPokemonSpecies(pokemonId) {
-    try {
+    
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
       const data = await response.json();
       return data;
-    } catch (error) {
-      console.error('Error al traer la especie del pokemon', error);
-    }
   }
 
   async fetchEvolutionChain(url) {
-    try {
+
       const response = await fetch(url);
       const data = await response.json();
       return data;
-    } catch (error) {
-      console.error('Error al traer la url de la cadena', error);
-    }
+
   }
 
   async fetchEvolutions(chain) {
@@ -73,15 +67,13 @@ export class PokemonDm extends LitElement {
     return evolutions;
   }
   async fetchPokemonData(pokemonId) {
-    try {
+
       const speciesData = await this.fetchPokemonSpecies(pokemonId);
       const evolutionChainData = await this.fetchEvolutionChain(speciesData.evolution_chain.url);
       const evolutions = await this.fetchEvolutions(evolutionChainData.chain);
 
       this.evolutioData = evolutions;
-    } catch (error) {
-      console.error('Error  al traer la evolucion', error);
-    }
+
   }
 
 }

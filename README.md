@@ -52,7 +52,7 @@ import '@bbva-web-components/pokemon-dm/pokemon-dm.js';
 
 ![LitElement component](https://img.shields.io/badge/litElement-component-blue.svg)
 
-This component ...
+Este componente DM, se utiliza en un proyecto de Framework cells de BBVA en  el cual enlista varios pokemones Y sus evoluciones.Este comoponente se encarga del manejo de datos y extracción de datos de la API  de pokemones. Este esta directamiente viculado con dos componentes Ui uno para enlistar pokemones y otro para traer  las evoluciones de los pokemones seleccionados.
 
 Example:
 
