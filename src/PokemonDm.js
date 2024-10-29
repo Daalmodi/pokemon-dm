@@ -20,7 +20,7 @@ export class PokemonDm extends LitElement {
 
     const promises = [];
 
-    for (let index = 1; index <= 20; index++) {
+    for (let index = 1; index <= 50; index++) {
       promises.push(
         fetch(`https://pokeapi.co/api/v2/pokemon/${index}`)
           .then((response) => response.json())
